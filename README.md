@@ -1,6 +1,9 @@
 # Ezerver
 基于 Socket 实现的一个简易的的 Web 服务器
 
+ **注意 !! 该项目已不在此处继续更新，新的项目地址在　[Ezerver](https://github.com/Ericwyn/Ezerver)**
+ 
+ **Note !! This item is no longer updated here. The new project address is　[Ezerver](https://github.com/Ericwyn/Ezerver)**
  
 ## 默认配置
  - 监听端口 9090
@@ -33,13 +36,4 @@
 
 然后访问 localhost:8080 端口就可以了
 
-更多的文档说明请查看 [Ezerver 中文文档](documents/Ezerver_doc_v1.md)
-
-## TODO
- - ~~对 `GET` 和 `POST` 的请求参数进行解析~~ 完成
- - 引入对 json 的支持，以实现返回 json 数据，或者接受 json 请求
- - uri `/` 的默认映射或者转跳 
- - 404、302、等的各种 HTTP 返回状态码
- - 启动配置文件
- - ......
  
