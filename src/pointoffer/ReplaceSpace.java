@@ -1,4 +1,4 @@
-package job;
+package pointoffer;
 
 import org.junit.Test;
 
