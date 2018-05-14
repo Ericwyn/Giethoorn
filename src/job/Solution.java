@@ -9,51 +9,45 @@ import org.junit.Test;
  * 输入这样的一个二维数组和一个整数，判断数组中是否含有该整数
  *
  *
+ * 当前位置 row，col，指向当前矩阵的最右上角
+ * 然后从矩阵的右上角开始，一步步缩小 target 可能在的范围的矩阵
+ * 如果与 [row, col] 相等，直接输出 true
+ * 如果比 [row, col] 的数字小的话， col --，矩阵减小左右边一列
+ * 如果比 [row, col] 的数字大的话， row ++,矩阵减小最上面的一行
+ * 直到便利完整个矩阵，都无法
+ *
  * Created by Ericwyn on 18-4-24.
  */
 public class Solution {
     public boolean Find(int target, int [][] array) {
-        if (target < array[0][0] || target > array[array.length-1][array[0].length-1]){
-            return false;
+        boolean isFind = false;
+        int rows = array.length;
+        int colums = array[0].length;
+        int row = 0;
+        int col = array[0].length-1;
+        while (row < rows && col >= 0){
+            if (array[row][col] == target){
+                isFind = true;
+                break;
+            }else if (array[row][col] > target){
+                col--;
+            }else {
+                row++;
+            }
         }
-        int inArr = intInArr(array, 0, array.length, target);
-        intInArr2(array[inArr],0,array[inArr].length,target);
-
-        return false;
-    }
-
-
-    private static int intInArr(int[][] arr,int a,int b,int n){
-        if (arr[(b-a)/2+a][0] > n){
-            return intInArr(arr,a,(b-a)/2+a,n);
-        }else if (arr[(b-a)/2+a][0]<n){
-            return intInArr(arr,(b-a)/2+a,b,n);
-        }else if (arr[(b-a)/2+a][0] == n){
-            return (b-a)/2+a;
-        }
-        return n;
-    }
-
-    private static int intInArr2(int[] arr,int a,int b,int n){
-        if (arr[(b-a)/2+a] > n){
-            return intInArr2(arr,a,(b-a)/2+a,n);
-        }else if (arr[(b-a)/2+a]<n){
-            return intInArr2(arr,(b-a)/2+a,b,n);
-        }else if (arr[(b-a)/2+a] == n){
-            return (b-a)/2+a;
-        }
-        return -1;
+        return isFind;
     }
 
     @Test
     public void test(){
-        int a[][] = new int[2][6];
-        a[0] = new int[]{1,2,5,6,10,15};
-        a[1] = new int[]{0,0,0,0,0, 0};
+        int[][] matrix = {
+                { 1, 2, 8, 9 },
+                { 2, 4, 9, 12 },
+                { 4, 7, 10, 13 },
+                { 6, 8, 11, 15 }
+        };
 
-        int[] temp2 = new int[]{1,2,5,6,10,15};
-        int[] temp = a[0];
-        System.out.println(intInArr2(a[0],0,a[0].length,7));
+        System.out.println(Find(12,matrix));
     }
 
 }
