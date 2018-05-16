@@ -1,5 +1,7 @@
 package pointoffer;
 
+import org.junit.Test;
+
 /**
  *
  * java 位运算
@@ -16,10 +18,37 @@ package pointoffer;
  *
  *      于此对应的 a >>= 1 ，代表 a = a >> 1，与 a += 1同理
  *
+ * 基本规律
+ *      -a = ~(a - 1) = ~a + 1
+ *
+ *      >>1 相当于 / 2
+ *      <<1 相当于 × 2
+ *
+ *      奇数 & 1 = 1
+ *      偶数 & 1 = 0
+ *
  * Created by Ericwyn on 18-5-15.
  */
 public class BitCalculate {
 
+    //加法运算
+    public static int add(int num1,int num2){
+        int a = num1;
+        int b = num2;
+        int temp = (a&b);
+        int c = temp<<1;
+        while (c!=0){
+            a = a^b;
+            b = c;
+            c = (a&b)<<1;
+        }
+        return a^b;
+    }
 
+
+    @Test
+    public void test(){
+        System.out.println(4&1);
+    }
 
 }
