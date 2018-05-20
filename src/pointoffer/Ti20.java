@@ -35,7 +35,7 @@ public class Ti20 {
 
     public int min() {
         if (temp==null){
-            temp = new k<>()
+            temp = new Stack<>();
         }
         int min = stack.peek();
         int tempNum = 0;
