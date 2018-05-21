@@ -58,23 +58,20 @@ public class Ti17 {
      * @param tree2
      * @return
      */
-    public boolean doesTree1HaveTree2(TreeNode tree1,TreeNode tree2){
+    public boolean doesTree1HaveTree2(TreeNode tree1,TreeNode tree2) {
         // tree1 到底，但是 tree2 没有到底
-        if (tree1==null && tree2!=null){
+        if (tree1 == null && tree2 != null) {
             return false;
         }
         // 如果除了上面的那种情况外，tree2 到底了
         // 那么久成功了
-        if (tree2 == null){
+        if (tree2 == null) {
             return true;
         }
         //
-        if (tree1.val!=tree2.val){
-            return false;
-        }else {
-            return doesTree1HaveTree2(tree1.left,tree2.left)
-                    && doesTree1HaveTree2(tree1.right,tree2.right);
-        }
+        return tree1.val == tree2.val
+                && doesTree1HaveTree2(tree1.left, tree2.left)
+                && doesTree1HaveTree2(tree1.right, tree2.right);
 
     }
 }
