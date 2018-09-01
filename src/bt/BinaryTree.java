@@ -84,9 +84,9 @@ public class BinaryTree {
      * 二叉树的层序遍历
      * @return
      */
-    public List level(){
+    public List<TreeNode> level(){
         Queue<TreeNode> queue = new LinkedList<>();
-        ArrayList res = new ArrayList<>();
+        ArrayList<TreeNode> res = new ArrayList<>();
         queue.offer(this.root);
         while (!queue.isEmpty()){
             TreeNode nodeintemp = queue.poll();
@@ -96,7 +96,7 @@ public class BinaryTree {
             if (nodeintemp.getRight()!=null){
                 queue.offer(nodeintemp.getRight());
             }
-            res.add(nodeintemp.getDate());
+            res.add(nodeintemp);
         }
         return res;
     }

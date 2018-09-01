@@ -11,7 +11,20 @@ import java.util.ArrayList;
  *
  * ----------------------------
  *
+ * 二叉搜索树定义：左孩子比父节点小，右孩子比父节点大，”中序遍历“可以让结点有序。
+ *
+ * ----------------------------
+ *
  * 第一个想法就是，直接中序遍历，然后存储到一个　List 里面
+ * 这个方法能够 ac 但是会付出存储成本
+ *
+ * ----------------------------
+ *
+ * 正常的方法应该是，
+ * 1，root 节点与左子树的最右节点建立绑定
+ * 2，root 节点与右子树的最左节点建立绑定
+ *
+ * 以左子树和右子树的最顶部节点为 root ，然后递归
  *
  * Created by Ericwyn on 18-6-1.
  */
@@ -28,7 +41,7 @@ public class Ti26 {
 
     // 运行时间：16ms
     // 占用内存：9456k
-    public TreeNode Convert(TreeNode pRootOfTree) {
+    public TreeNode convert(TreeNode pRootOfTree) {
         if (pRootOfTree == null){
             return null;
         }
@@ -66,17 +79,75 @@ public class Ti26 {
     }
 
 
+    /**
+     * 正解
+     *
+     * @param pRootOfTree
+     */
+    public void convert2(TreeNode pRootOfTree) {
+        if (pRootOfTree == null){
+            return;
+        }
+        TreeNode rootLeft = pRootOfTree.left;
+        if (rootLeft != null){
+            TreeNode leftMost = toRightmost(rootLeft);
+            leftMost.right = pRootOfTree;
+            pRootOfTree.left = leftMost;
+            if (leftMost != rootLeft){
+                convert2(rootLeft);
+            }
+        }
+
+        TreeNode rootRight = pRootOfTree.right;
+        if (rootRight != null){
+            TreeNode rightMost = toLeftmost(rootRight);
+            rightMost.left = pRootOfTree;
+            pRootOfTree.right = rightMost;
+            if (rightMost != rootRight){
+                convert2(rootRight);
+            }
+        }
+    }
+
+    private TreeNode toLeftmost(TreeNode root){
+        TreeNode temp = root;
+        while (temp.left != null){
+            temp = temp.left;
+        }
+        return temp;
+    }
+
+    private TreeNode toRightmost(TreeNode root){
+        TreeNode temp = root;
+        while (temp.right != null){
+            temp = temp.right;
+        }
+        return temp;
+    }
+
+
     @Test
     public void test(){
-        TreeNode root = new TreeNode(1);
+//        TreeNode root = new TreeNode(1);
+//        root.left = new TreeNode(2);
+//        root.right = new TreeNode(3);
+//        root.left.left = new TreeNode(4);
+//        root.left.right = new TreeNode(5);
+//        root.right.left = new TreeNode(6);
+//        root.right.right = new TreeNode(7);
+//        TreeNode convert = convert(root);
+
+
+        TreeNode root = new TreeNode(4);
         root.left = new TreeNode(2);
-        root.right = new TreeNode(3);
-        root.left.left = new TreeNode(4);
-        root.left.right = new TreeNode(5);
-        root.right.left = new TreeNode(6);
+        root.right = new TreeNode(6);
+        root.left.left = new TreeNode(1);
+        root.left.right = new TreeNode(3);
+        root.right.left = new TreeNode(5);
         root.right.right = new TreeNode(7);
-        TreeNode convert = Convert(root);
-        System.out.println(convert);
+
+        convert2(root);
+        System.out.println(root);
 
     }
 }
