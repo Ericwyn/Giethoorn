@@ -84,7 +84,7 @@ public class Ti26 {
      *
      * @param pRootOfTree
      */
-    public void convert2(TreeNode pRootOfTree) {
+    public void Convert(TreeNode pRootOfTree) {
         if (pRootOfTree == null){
             return;
         }
@@ -94,7 +94,7 @@ public class Ti26 {
             leftMost.right = pRootOfTree;
             pRootOfTree.left = leftMost;
             if (leftMost != rootLeft){
-                convert2(rootLeft);
+                Convert(rootLeft);
             }
         }
 
@@ -104,7 +104,7 @@ public class Ti26 {
             rightMost.left = pRootOfTree;
             pRootOfTree.right = rightMost;
             if (rightMost != rootRight){
-                convert2(rootRight);
+                Convert(rootRight);
             }
         }
     }
@@ -146,7 +146,7 @@ public class Ti26 {
         root.right.left = new TreeNode(5);
         root.right.right = new TreeNode(7);
 
-        convert2(root);
+        Convert(root);
         System.out.println(root);
 
     }
